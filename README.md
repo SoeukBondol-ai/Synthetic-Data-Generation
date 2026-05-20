@@ -4,6 +4,12 @@ Generates a synthetic image dataset of all **33 Khmer consonants** for training 
 
 ---
 
+## Showcase
+
+A visual sample of generated images. The preview grid is saved as `preview_grid.png` when you run `python generate.py --preview`.
+
+![Preview grid](public/preview_grid.png)
+
 ## Folder Structure
 
 ```
@@ -39,7 +45,7 @@ uv sync
 ### Step 3 — Run setup
 
 ```bash
-uv run  setup.py
+uv run setup.py
 ```
 
 

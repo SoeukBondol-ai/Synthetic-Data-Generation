@@ -122,15 +122,6 @@ khmer_consonant_dataset/
 └── preview_grid.png     ← visual sample of all classes (with --preview)
 ```
 
----
-
-## Showcase
-
-A visual sample of generated images. The preview grid is saved as `preview_grid.png` when you run `python generate.py --preview`.
-
-![Preview grid](public/preview_grid.png)
-
----
 
 ## Loading in a Training Notebook
 

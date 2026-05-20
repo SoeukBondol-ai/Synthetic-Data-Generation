@@ -1,0 +1,102 @@
+fonts:
+  - file: KhmerOS.ttf
+    family: KhmerOS
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS.ttf
+
+  - file: KhmerOSsys.ttf
+    family: KhmerOS System
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_sys.ttf
+
+  - file: KhmerOSbattambang.ttf
+    family: KhmerOS Battambang
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_battambang.ttf
+
+  - file: KhmerOSbokor.ttf
+    family: KhmerOS Bokor
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_bokor.ttf
+
+  - file: KhmerOScontent.ttf
+    family: KhmerOS Content
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_content.ttf
+
+  - file: KhmerOSfasthand.ttf
+    family: KhmerOS Fasthand
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_fasthand.ttf
+
+  - file: KhmerOSfreehand.ttf
+    family: KhmerOS Freehand
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_freehand.ttf
+
+  - file: KhmerOSmetalchrieng.ttf
+    family: KhmerOS Metal Chrieng
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_metalchrieng.ttf
+
+  - file: KhmerOSmuol.ttf
+    family: KhmerOS Muol
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_muol.ttf
+
+  - file: KhmerOSmuollight.ttf
+    family: KhmerOS Muol Light
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_muollight.ttf
+
+  - file: KhmerOSsiemreap.ttf
+    family: KhmerOS Siemreap
+    style: Regular
+    license: GPL-2.0
+    download_url: https://raw.githubusercontent.com/KhmerSoftwareInitiative/khmer-unicode-fonts/master/fonts/v5.0/KhmerOS_siemreap.ttf
+
+  - file: Mondulkiri-R.ttf
+    family: Khmer Mondulkiri
+    style: Regular
+    license: OFL-1.1
+    download_url: http://deb.debian.org/debian/pool/main/f/fonts-sil-mondulkiri/fonts-sil-mondulkiri_7.100.orig.tar.xz
+
+  - file: Mondulkiri-B.ttf
+    family: Khmer Mondulkiri
+    style: Bold
+    license: OFL-1.1
+    download_url: http://deb.debian.org/debian/pool/main/f/fonts-sil-mondulkiri/fonts-sil-mondulkiri_7.100.orig.tar.xz
+
+  - file: Mondulkiri-I.ttf
+    family: Khmer Mondulkiri
+    style: Italic
+    license: OFL-1.1
+    download_url: http://deb.debian.org/debian/pool/main/f/fonts-sil-mondulkiri/fonts-sil-mondulkiri_7.100.orig.tar.xz
+
+  - file: Busra-R.ttf
+    family: Khmer Busra
+    style: Regular
+    license: OFL-1.1
+    download_url: http://deb.debian.org/debian/pool/main/f/fonts-sil-mondulkiri/fonts-sil-mondulkiri_7.100.orig.tar.xz
+
+  - file: Busra-B.ttf
+    family: Khmer Busra
+    style: Bold
+    license: OFL-1.1
+    download_url: http://deb.debian.org/debian/pool/main/f/fonts-sil-mondulkiri/fonts-sil-mondulkiri_7.100.orig.tar.xz
+
+  - file: Busra-I.ttf
+    family: Khmer Busra
+    style: Italic
+    license: OFL-1.1
+    download_url: http://deb.debian.org/debian/pool/main/f/fonts-sil-mondulkiri/fonts-sil-mondulkiri_7.100.orig.tar.xz

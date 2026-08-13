@@ -1,7 +1,4 @@
-"""
-Pipeline applied per sample (in order):
-    rotate → scale → shift → shear → blur → noise → brightness
-"""
+# Augmentation pipeline: rotate → scale → shift → shear → blur → noise → brightness.
 
 import random
 import numpy as np

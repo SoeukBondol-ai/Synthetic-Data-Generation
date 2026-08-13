@@ -1,13 +1,4 @@
-"""
-
-CLI entry point for the Khmer consonant dataset generator.
-
-Usage examples:
-    python generate.py
-    python generate.py --samples 300 --preview
-    python generate.py --output ./data --samples 500 --size 64
-    python generate.py --samples 100 --no-split
-"""
+# CLI entry point for the Khmer character dataset generator.
 
 import argparse
 import sys
@@ -17,6 +8,7 @@ import os
 sys.path.insert(0, os.path.dirname(__file__))
 
 from generator import generate_dataset, save_preview_grid
+from constants import KHMER_CLASSES, KHMER_CONSONANTS, KHMER_DIGITS
 
 
 def parse_args() -> argparse.Namespace:
@@ -68,11 +60,23 @@ def parse_args() -> argparse.Namespace:
         default=42,
         help="Random seed for reproducibility.",
     )
+    parser.add_argument(
+        "--classes",
+        choices=["all", "consonants", "digits"],
+        default="all",
+        help="Which character set to generate.",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+
+    classes = {
+        "all": KHMER_CLASSES,
+        "consonants": KHMER_CONSONANTS,
+        "digits": KHMER_DIGITS,
+    }[args.classes]
 
     generate_dataset(
         output_dir=args.output,
@@ -80,10 +84,11 @@ def main() -> None:
         img_size=args.size,
         train_ratio=0.0 if args.no_split else args.train_ratio,
         seed=args.seed,
+        classes=classes,
     )
 
     if args.preview:
-        save_preview_grid(args.output)
+        save_preview_grid(args.output, classes=classes)
 
 
 if __name__ == "__main__":

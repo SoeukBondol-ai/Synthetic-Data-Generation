@@ -1,6 +1,6 @@
 # Khmer Consonant Dataset Generator
 
-Generates a synthetic image dataset of all **33 Khmer consonants** for training handwriting recognition models. Works on **Windows, macOS, and Linux** with no system configuration — all fonts are bundled in the `fonts/` folder.
+Generates a synthetic image dataset of all **33 Khmer consonants** and **10 Khmer digits** (០–៩) for training handwriting recognition models. Works on **Windows, macOS, and Linux** with no system configuration — all fonts are bundled in the `fonts/` folder.
 
 ---
 
@@ -82,6 +82,7 @@ python generate.py [options]
 | `--no-split`       | off                         | Skip train/val split, put all images in `all/` |
 | `--preview`        | off                         | Save a `preview_grid.png`                      |
 | `--seed`           | `42`                        | Random seed for reproducibility                |
+| `--classes`        | `all`                       | Which set to generate: `all`, `consonants`, `digits` |
 
 ---
 

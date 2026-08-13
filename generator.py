@@ -12,7 +12,7 @@ from constants import (
     FONT_PATHS,
     FONT_SIZE_RANGE,
     IMG_SIZE,
-    KHMER_CONSONANTS,
+    KHMER_CLASSES,
     LABEL_MAP,
 )
 from renderer import is_visible, render_character
@@ -26,42 +26,28 @@ def generate_dataset(
     img_size: int = IMG_SIZE,
     train_ratio: float = 0.8,
     seed: int = 42,
+    classes: list[tuple[str, str]] | None = None,
 ) -> dict:
-    """
-    Generate a synthetic Khmer consonant image dataset.
-
-    Folder structure produced:
-        <output_dir>/
-            train/<class_name>/<class_name>_NNNN.png
-            val/<class_name>/<class_name>_NNNN.png
-            dataset_info.json
-
-    Args:
-        output_dir:        Root directory to write the dataset into.
-        samples_per_class: Number of images to generate per consonant class.
-        img_size:          Final image resolution in pixels (square).
-        train_ratio:       Fraction of images used for training (rest → val).
-        seed:              Random seed for reproducibility.
-
-    Returns:
-        Metadata dict also written to dataset_info.json.
-    """
+    """Generate the dataset (train/val folders + dataset_info.json)."""
     random.seed(seed)
     np.random.seed(seed)
 
+    if classes is None:
+        classes = KHMER_CLASSES
+
     output_dir = Path(output_dir)
-    _print_header(samples_per_class, img_size, output_dir, train_ratio)
+    _print_header(samples_per_class, img_size, output_dir, train_ratio, classes)
 
     # Create all class folders up front
     for split in ("train", "val"):
-        for _, name in KHMER_CONSONANTS:
+        for _, name in classes:
             (output_dir / split / name).mkdir(parents=True, exist_ok=True)
 
     stats: dict = {"total": 0, "per_class": {}}
-    total_expected = len(KHMER_CONSONANTS) * samples_per_class
+    total_expected = len(classes) * samples_per_class
 
     with tqdm(total=total_expected, desc="Generating", unit="img") as pbar:
-        for char, name in KHMER_CONSONANTS:
+        for char, name in classes:
             images = _generate_class(char, samples_per_class, img_size, pbar)
             _save_split(images, output_dir, name, train_ratio)
             n_train = int(len(images) * train_ratio)
@@ -73,7 +59,7 @@ def generate_dataset(
             }
             stats["total"] += len(images)
 
-    meta = _save_metadata(output_dir, img_size, stats)
+    meta = _save_metadata(output_dir, img_size, stats, classes)
     _print_footer(stats["total"], output_dir)
     return meta
 
@@ -123,11 +109,13 @@ def _save_split(
             img.save(path)
 
 
-def _save_metadata(output_dir: Path, img_size: int, stats: dict) -> dict:
+def _save_metadata(
+    output_dir: Path, img_size: int, stats: dict, classes: list[tuple[str, str]]
+) -> dict:
     """Write dataset_info.json and return the metadata dict."""
     meta = {
-        "description": "Synthetic Khmer consonant dataset",
-        "num_classes":  len(KHMER_CONSONANTS),
+        "description": "Synthetic Khmer character dataset",
+        "num_classes":  len(classes),
         "image_size":   img_size,
         "fonts_used":   [os.path.basename(f) for f in FONT_PATHS],
         "total_images": stats["total"],
@@ -145,24 +133,18 @@ def save_preview_grid(
     output_dir: str,
     n_samples: int = 8,
     save_path: str | None = None,
+    classes: list[tuple[str, str]] | None = None,
 ) -> str:
-    """
-    Save a PNG grid showing all 33 consonants × n_samples example images.
+    """Save a preview grid PNG (classes × n_samples examples)."""
+    if classes is None:
+        classes = KHMER_CLASSES
 
-    Args:
-        output_dir: Root of the generated dataset (must contain train/).
-        n_samples:  Number of sample images to show per row.
-        save_path:  Override the output file path (optional).
-
-    Returns:
-        Path to the saved grid image.
-    """
     output_dir = Path(output_dir)
     cell       = IMG_SIZE + 4
     label_w    = 52
 
     grid_w = label_w + n_samples * cell + 20
-    grid_h = len(KHMER_CONSONANTS) * cell + 20
+    grid_h = len(classes) * cell + 20
     grid   = Image.new("RGB", (grid_w, grid_h), (245, 245, 250))
     draw   = ImageDraw.Draw(grid)
 
@@ -171,7 +153,7 @@ def save_preview_grid(
     except Exception:
         label_font = ImageFont.load_default()
 
-    for row, (char, name) in enumerate(KHMER_CONSONANTS):
+    for row, (char, name) in enumerate(classes):
         y = row * cell + 10
         if row % 2 == 0:
             draw.rectangle([0, y - 2, grid_w, y + cell - 2], fill=(235, 240, 248))
@@ -192,15 +174,21 @@ def save_preview_grid(
 
 # ── Internal helpers ───────────────────────────────────────────────────────────
 
-def _print_header(samples: int, img_size: int, output_dir: Path, train_ratio: float) -> None:
+def _print_header(
+    samples: int,
+    img_size: int,
+    output_dir: Path,
+    train_ratio: float,
+    classes: list[tuple[str, str]],
+) -> None:
     val_pct   = int((1 - train_ratio) * 100)
     train_pct = int(train_ratio * 100)
     print(f"\n{'='*52}")
-    print(f"  Khmer Consonant Dataset Generator")
+    print(f"  Khmer Character Dataset Generator")
     print(f"{'='*52}")
-    print(f"  Classes     : {len(KHMER_CONSONANTS)} consonants")
+    print(f"  Classes     : {len(classes)} characters")
     print(f"  Fonts       : {len(FONT_PATHS)} fonts")
-    print(f"  Samples/cls : {samples}  →  {len(KHMER_CONSONANTS) * samples} total")
+    print(f"  Samples/cls : {samples}  →  {len(classes) * samples} total")
     print(f"  Image size  : {img_size}×{img_size} px")
     print(f"  Split       : train {train_pct}% / val {val_pct}%")
     print(f"  Output      : {output_dir}")

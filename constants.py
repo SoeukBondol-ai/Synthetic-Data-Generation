@@ -16,10 +16,7 @@ FONTS_YAML = _find_fonts_yaml()
 
 # ── Load font list from config ─────────────────────────────────────────────────
 def _load_font_paths() -> list[str]:
-    """
-    Read fonts.yaml and return absolute paths to fonts that exist in fonts/.
-    Skips any entry whose file is missing (graceful degradation).
-    """
+    """Read fonts.yaml → absolute paths to fonts present in fonts/."""
     with open(FONTS_YAML, encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
@@ -58,9 +55,20 @@ KHMER_CONSONANTS: list[tuple[str, str]] = [
     ("អ", "a"),
 ]
 
+# ── 10 Khmer digits in Unicode order ─────────────────────────────────────────
+# Each entry: (unicode_char, folder_name)
+# folder_name is the numeric value, so labels map naturally to int(digit).
+KHMER_DIGITS: list[tuple[str, str]] = [
+    ("០", "0"), ("១", "1"), ("២", "2"), ("៣", "3"), ("៤", "4"),
+    ("៥", "5"), ("៦", "6"), ("៧", "7"), ("៨", "8"), ("៩", "9"),
+]
+
+# Combined character set (consonants + digits) — used by default.
+KHMER_CLASSES: list[tuple[str, str]] = KHMER_CONSONANTS + KHMER_DIGITS
+
 # Convenient lookup: folder_name → integer index (for model label encoding)
 LABEL_MAP: dict[str, int] = {
-    name: idx for idx, (_, name) in enumerate(KHMER_CONSONANTS)
+    name: idx for idx, (_, name) in enumerate(KHMER_CLASSES)
 }
 
 # ── Image settings ─────────────────────────────────────────────────────────────

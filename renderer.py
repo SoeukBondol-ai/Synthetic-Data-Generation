@@ -1,6 +1,4 @@
-"""
-Renders a single Khmer character as a centered grayscale PIL image.
-"""
+# Renders a single Khmer character as a centered grayscale PIL image.
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -9,17 +7,7 @@ from constants import CANVAS_SIZE
 
 
 def render_character(char: str, font_path: str, font_size: int) -> Image.Image:
-    """
-    Draw a single Khmer character centered on a white square canvas.
-
-    Args:
-        char:      Unicode character to render (e.g. 'ក').
-        font_path: Absolute path to a .ttf / .otf font file.
-        font_size: Point size to render at.
-
-    Returns:
-        Grayscale PIL image of size CANVAS_SIZE × CANVAS_SIZE.
-    """
+    """Draw one character centered on a white square canvas."""
     font   = ImageFont.truetype(font_path, font_size)
     canvas = Image.new("L", (CANVAS_SIZE, CANVAS_SIZE), 255)
     draw   = ImageDraw.Draw(canvas)
@@ -36,13 +24,6 @@ def render_character(char: str, font_path: str, font_size: int) -> Image.Image:
 
 
 def is_visible(img: Image.Image, min_dark_pixels: int = 20) -> bool:
-    """
-    Return True if the rendered image contains enough dark pixels
-    to be considered a valid glyph (not a blank/missing glyph).
-
-    Args:
-        img:             Grayscale PIL image.
-        min_dark_pixels: Minimum number of pixels below 128 required.
-    """
+    """True if the image has enough dark pixels to be a valid glyph."""
     arr = np.array(img)
     return int((arr < 128).sum()) >= min_dark_pixels
